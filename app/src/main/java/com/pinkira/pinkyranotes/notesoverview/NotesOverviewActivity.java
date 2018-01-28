@@ -1,4 +1,4 @@
-package com.pinkira.pinkyranotes;
+package com.pinkira.pinkyranotes.notesoverview;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -12,6 +12,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.pinkira.pinkyranotes.R;
 
 public class NotesOverviewActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
