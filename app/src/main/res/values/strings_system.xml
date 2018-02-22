@@ -1,0 +1,6 @@
+<resources>
+    <string name="string_syst_app_name">PinkyraNotes</string>
+
+    <string name="string_syst_nav_bar_open">Abrir aba de navegação</string>
+    <string name="string_syst_nav_bar_close">Fechar aba de navegação</string>
+</resources>

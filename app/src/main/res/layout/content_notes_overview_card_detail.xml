@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView android:id="@+id/cnocd_card_layout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/card_margin"
+    card_view:cardCornerRadius="@dimen/card_radius" >
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/card_padding" >
+
+        <View
+            android:id="@+id/cnocd_view_color_indicator"
+            android:layout_width="match_parent"
+            android:layout_height="4dip"
+            android:background="@color/colorAccent"
+            card_view:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/cnocd_txtv_title"
+            style="?android:textAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:textStyle="bold"
+            card_view:layout_constraintTop_toBottomOf="@id/cnocd_view_color_indicator"
+            tools:text="Note Title Test" />
+
+        <View
+            android:id="@+id/cnocd_view_line_separator"
+            android:layout_width="match_parent"
+            android:layout_height="2dip"
+            android:layout_marginTop="4dp"
+            android:background="@color/lineSeparator"
+            card_view:layout_constraintTop_toBottomOf="@+id/cnocd_txtv_title" />
+
+        <TextView
+            android:id="@+id/cnocd_txtv_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="8"
+            android:ellipsize="end"
+            card_view:layout_constraintTop_toBottomOf="@+id/cnocd_view_line_separator"
+            tools:text="@tools:sample/lorem/random" />
+
+    </android.support.constraint.ConstraintLayout>
+</android.support.v7.widget.CardView>

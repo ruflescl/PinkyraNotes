@@ -1,0 +1,7 @@
+<resources>
+    <string name="string_cnov_activity_title">Suas notas</string>
+    <string name="string_cnov_label_intro_1">Suas notas aparecerão aqui! :)</string>
+    <string name="string_cnov_label_intro_2">Tente pressionar o botão flutuante</string>
+    <string name="string_cnov_gerenciamento">Gerenciamento</string>
+    <string name="string_cnov_configuracoes">Configurações</string>
+</resources>
