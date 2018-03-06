@@ -46,7 +46,7 @@ public class NotesOverviewFragment
         super.onCreate(savedInstanceState);
         userActionsListener = new NotesOverviewPresenter(
                 Injection.provideSharedPreferencesHelper(this.getContext()),
-                Injection.provideDao_Note(this.getContext()),
+                Injection.provideNoteRepository(this.getContext()),
                 this, this);
 
         cardDetailAdapter = new NoteCardDetailAdapter(this);

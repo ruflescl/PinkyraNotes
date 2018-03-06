@@ -7,8 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.pinkyra.pinkyranotes.db.note.Note;
-import com.pinkyra.pinkyranotes.db.note.NoteDao;
-import com.pinkyra.pinkyranotes.notesoverview.notedetail.api.NoteItemListener;
+import com.pinkyra.pinkyranotes.db.note.NoteRepository;
 import com.pinkyra.pinkyranotes.util.SharedPreferencesHelper;
 
 import java.util.List;
@@ -18,17 +17,17 @@ import java.util.List;
  */
 public class NotesOverviewPresenter implements NotesOverviewContract.UserActionsListener {
 
-    private NoteDao noteDao;
+    private NoteRepository noteRepo;
     private NotesOverviewContract.View notesOverview;
     private SharedPreferencesHelper sharedPreferencesHelper;
     private LiveData<List<Note>> cachedNotes;
     private LifecycleOwner lifecycleOwner;
 
     public NotesOverviewPresenter(@NonNull SharedPreferencesHelper sharedPreferencesHelper,
-                                  @NonNull NoteDao noteDao,
+                                  @NonNull NoteRepository noteRepo,
                                   @NonNull NotesOverviewContract.View notesOverview,
                                   @NonNull LifecycleOwner lifecycleOwner) {
-        this.noteDao = noteDao;
+        this.noteRepo = noteRepo;
         this.notesOverview = notesOverview;
         this.sharedPreferencesHelper = sharedPreferencesHelper;
         this.lifecycleOwner = lifecycleOwner;
@@ -39,7 +38,7 @@ public class NotesOverviewPresenter implements NotesOverviewContract.UserActions
         notesOverview.setProgressIndicator(true); // TODO: Observe the live data to hide the progress indicator (?)
 
         cachedNotes = null;
-        cachedNotes = noteDao.loadAllNotes();
+        cachedNotes = noteRepo.getAllNotes();
         cachedNotes.observe(lifecycleOwner, new Observer<List<Note>>() {
             @Override
             public void onChanged(@Nullable List<Note> notes) {

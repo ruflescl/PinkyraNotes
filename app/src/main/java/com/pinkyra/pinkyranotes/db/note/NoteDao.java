@@ -17,7 +17,7 @@ import static android.arch.persistence.room.OnConflictStrategy.REPLACE;
 @Dao
 public interface NoteDao {
     @Query("SELECT * FROM Note")
-    LiveData<List<Note>> loadAllNotes(); // TODO: Use LiveData here (and fix the fake repo :) )
+    LiveData<List<Note>> loadAllNotes();
 
     @Query("SELECT * FROM Note WHERE id = :id")
     Note loadNoteFromId(@NonNull Long id);

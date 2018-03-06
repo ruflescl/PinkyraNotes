@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 
 import com.pinkyra.pinkyranotes.db.note.FakeNoteDao;
+import com.pinkyra.pinkyranotes.db.note.FakeNoteRepo;
 import com.pinkyra.pinkyranotes.db.note.NoteDao;
 import com.pinkyra.pinkyranotes.util.FakeSharedPreferencesHelper;
 import com.pinkyra.pinkyranotes.util.SharedPreferencesHelper;
@@ -19,7 +20,14 @@ public class Injection {
         return new FakeSharedPreferencesHelper(appContext);
     }
 
-    public static NoteDao provideDao_Note(@NonNull Context context) {
+    private static NoteDao provideDao_Note(@NonNull Context context) {
         return new FakeNoteDao();
+    }
+
+    static FakeNoteRepo noteRepository = null;
+    public static FakeNoteRepo provideNoteRepository(@NonNull Context context) {
+        if (noteRepository == null) noteRepository = new FakeNoteRepo(provideDao_Note(context));
+
+        return noteRepository;
     }
 }

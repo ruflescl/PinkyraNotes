@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 
 import com.pinkyra.pinkyranotes.db.database.AppDatabase;
 import com.pinkyra.pinkyranotes.db.note.NoteDao;
+import com.pinkyra.pinkyranotes.db.note.NoteRepository;
 import com.pinkyra.pinkyranotes.util.SharedPreferencesHelper;
 
 /**
@@ -18,7 +19,14 @@ public class Injection {
         return new SharedPreferencesHelper(appContext);
     }
 
-    public static NoteDao provideDao_Note(@NonNull Context context) {
+    private static NoteDao provideDao_Note(@NonNull Context context) {
         return AppDatabase.getDatabase(context).noteDao();
+    }
+
+    static NoteRepository noteRepository = null;
+    public static NoteRepository provideNoteRepository(@NonNull Context context) {
+        if (noteRepository == null) noteRepository = new NoteRepository(provideDao_Note(context));
+
+        return noteRepository;
     }
 }
