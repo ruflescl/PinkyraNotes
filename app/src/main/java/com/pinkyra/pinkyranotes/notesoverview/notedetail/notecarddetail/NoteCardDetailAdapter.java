@@ -42,6 +42,7 @@ public class NoteCardDetailAdapter extends RecyclerView.Adapter<NoteCardDetailAd
         Note note = noteList.get(position);
         holder.title.setText(note.title);
         holder.content.setText(note.content);
+        holder.color_indicator.setBackgroundResource(note.color_accent.getColorResource());
     }
 
     @Override
@@ -92,6 +93,7 @@ public class NoteCardDetailAdapter extends RecyclerView.Adapter<NoteCardDetailAd
      * Card detail view holder used in {@link NoteCardDetailAdapter}
      */
     public class NoteCardDetailViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
+        public View color_indicator;
         public TextView title;
         public TextView content;
 
@@ -100,6 +102,7 @@ public class NoteCardDetailAdapter extends RecyclerView.Adapter<NoteCardDetailAd
         public NoteCardDetailViewHolder(View itemView, NoteItemListener noteItemListener) {
             super(itemView);
             this.itemListener = noteItemListener;
+            color_indicator = itemView.findViewById(R.id.cent_view_color_indicator);
             title = (TextView) itemView.findViewById(R.id.cnocd_txtv_title);
             content = (TextView) itemView.findViewById(R.id.cnocd_txtv_content);
             itemView.setOnClickListener(this);

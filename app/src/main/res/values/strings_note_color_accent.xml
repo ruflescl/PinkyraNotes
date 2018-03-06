@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="string_snca_label_color_red">Vermelho</string>
+    <string name="string_snca_label_color_purple">Roxo</string>
+    <string name="string_snca_label_color_blue">Azul</string>
+    <string name="string_snca_label_color_green">Verde</string>
+    <string name="string_snca_label_color_yellow">Amarelo</string>
+    <string name="string_snca_label_color_orange">Laranja</string>
+    <string name="string_snca_label_color_black">Preto</string>
+</resources>

@@ -5,4 +5,12 @@
     <color name="colorAccent">#ff7043</color>
     <color name="fabIconPrimaryColor">#FFFFFF</color>
     <color name="lineSeparator">@android:color/darker_gray</color>
+
+    <color name="noteAccent_Red">#d50000</color>
+    <color name="noteAccent_Purple">#aa00ff</color>
+    <color name="noteAccent_Blue">#304ffe</color>
+    <color name="noteAccent_Green">#64dd17</color>
+    <color name="noteAccent_Yellow">#ffe100</color>
+    <color name="noteAccent_Orange">#ff7043</color>
+    <color name="noteAccent_Black">#000000</color>
 </resources>

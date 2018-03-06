@@ -85,25 +85,35 @@ public class FakeNoteDao implements NoteDao {
         return result;
     }
 
-    private Note createNote(long id, String title, String content) {
+    private Note createNote(long id, String title, String content, NoteColorAccent.Colors color_accent) {
         Note result = new Note();
 
         result.id = id;
         result.title = title;
         result.content = content;
+        result.color_accent = color_accent;
 
         return result;
     }
 
     private Note createShortNote(long id) {
-        return createNote(id, String.valueOf(id) + " Short Title", "Short Content");
+        return createNote(id,
+                String.valueOf(id) + " Short Title",
+                "Short Content",
+                NoteColorAccent.Colors.YELLOW);
     }
 
     private Note createMediumNote(long id) {
-        return createNote(id, String.valueOf(id) + " Medium Title Medium Title", "Medium Content Medium Content Medium Content");
+        return createNote(id,
+                String.valueOf(id) + " Medium Title Medium Title",
+                "Medium Content Medium Content Medium Content",
+                NoteColorAccent.Colors.GREEN);
     }
 
     private Note createLongNote(long id) {
-        return createNote(id, String.valueOf(id) + " Long Title Long Title Long Title", "Long Content Long Content Long Content Long Content Long Content Long Content Long Content Long Content Long Content Long Content Long Content Long Content Long Content Long Content Long Content Long Content Long Content Long Content Long Content");
+        return createNote(id,
+                String.valueOf(id) + " Long Title Long Title Long Title",
+                "Long Content Long Content Long Content Long Content Long Content Long Content Long Content Long Content Long Content Long Content Long Content Long Content Long Content Long Content Long Content Long Content Long Content Long Content Long Content",
+                NoteColorAccent.Colors.RED);
     }
 }

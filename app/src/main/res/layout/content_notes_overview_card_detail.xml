@@ -14,10 +14,10 @@
         android:padding="@dimen/card_padding" >
 
         <View
-            android:id="@+id/cnocd_view_color_indicator"
+            android:id="@+id/cent_view_color_indicator"
             android:layout_width="match_parent"
             android:layout_height="4dip"
-            android:background="@color/colorAccent"
+            tools:background="@color/colorAccent"
             card_view:layout_constraintStart_toStartOf="parent" />
 
         <TextView
@@ -29,7 +29,7 @@
             android:ellipsize="end"
             android:maxLines="2"
             android:textStyle="bold"
-            card_view:layout_constraintTop_toBottomOf="@id/cnocd_view_color_indicator"
+            card_view:layout_constraintTop_toBottomOf="@id/cent_view_color_indicator"
             tools:text="Note Title Test" />
 
         <View
