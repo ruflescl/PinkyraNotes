@@ -1,6 +1,7 @@
 package com.pinkyra.pinkyranotes.db.note;
 
 import android.arch.persistence.room.TypeConverter;
+import android.content.Context;
 import android.support.annotation.NonNull;
 
 import com.pinkyra.pinkyranotes.R;
@@ -53,18 +54,24 @@ public class NoteColorAccent {
                     return item;
                 }
             }
-
             return DEFAULT_COLOR;
         }
 
-        public static List<Integer> getColorStrings() {
-            List<Integer> result = new ArrayList<>();
-
+        public static ArrayList<String> getColorStrings(@NonNull Context context) {
+            ArrayList<String> result = new ArrayList<>();
             for (Colors item : Colors.values()) {
-                result.add(item.getStringResource());
+                result.add(context.getString(item.getStringResource()));
             }
-
             return result;
+        }
+
+        public static Colors getColorFromString(@NonNull Context context, String selected) {
+            for (Colors item : Colors.values()) {
+                if (context.getString(item.getStringResource()).equals(selected)) {
+                    return item;
+                }
+            }
+            return DEFAULT_COLOR;
         }
     }
 

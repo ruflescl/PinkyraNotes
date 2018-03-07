@@ -18,6 +18,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".noteeditor.NoteEditorActivity"
+            android:label="@string/string_cent_label_editar_nota" />
     </application>
 
 </manifest>
