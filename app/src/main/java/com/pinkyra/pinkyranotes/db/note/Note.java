@@ -11,7 +11,7 @@ import android.support.annotation.NonNull;
  */
 @Entity
 public class Note {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     @NonNull
     public long id;
 
