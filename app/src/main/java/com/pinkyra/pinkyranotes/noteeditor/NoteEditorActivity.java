@@ -3,6 +3,9 @@ package com.pinkyra.pinkyranotes.noteeditor;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -56,5 +59,24 @@ public class NoteEditorActivity extends AppCompatActivity {
 
     private void changeColorAccent(@NonNull NoteColorAccent.Colors selectedColor) {
         colorAccentView.setBackgroundResource(selectedColor.getColorResource());
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.activity_note_editor_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.acne_menu_item_save:
+                //TODO Chamar presenter
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

@@ -4,4 +4,6 @@
     <string name="string_cent_label_editar_nota">Editar nota…</string>
     <string name="string_cent_label_title">Título</string>
     <string name="string_cent_label_content">Conteúdo</string>
+    <string name="string_cent_label_save">Salvar</string>
+    <string name="string_cent_label_delete">Apagar</string>
 </resources>
