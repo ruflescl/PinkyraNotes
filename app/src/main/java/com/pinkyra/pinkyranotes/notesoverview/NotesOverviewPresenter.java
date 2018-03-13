@@ -13,7 +13,7 @@ import com.pinkyra.pinkyranotes.util.SharedPreferencesHelper;
 import java.util.List;
 
 /**
- * Presenter for 'NotesOverview' activity
+ * Presenter for '{@link NotesOverviewActivity}'
  */
 public class NotesOverviewPresenter implements NotesOverviewContract.UserActionsListener {
 

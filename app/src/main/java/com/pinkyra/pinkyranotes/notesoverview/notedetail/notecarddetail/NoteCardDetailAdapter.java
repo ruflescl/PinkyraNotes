@@ -15,6 +15,9 @@ import com.pinkyra.pinkyranotes.notesoverview.notedetail.api.NoteItemListener;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * Adapter for drawing notes in {@link com.pinkyra.pinkyranotes.notesoverview.NotesOverviewFragment}
  * with a 'card-like' layout
@@ -93,18 +96,17 @@ public class NoteCardDetailAdapter extends RecyclerView.Adapter<NoteCardDetailAd
      * Card detail view holder used in {@link NoteCardDetailAdapter}
      */
     public class NoteCardDetailViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
-        public View color_indicator;
-        public TextView title;
-        public TextView content;
+        @BindView(R.id.cent_view_color_indicator) public View color_indicator;
+        @BindView(R.id.cnocd_txtv_title) public TextView title;
+        @BindView(R.id.cnocd_txtv_content) public TextView content;
 
         NoteItemListener itemListener;
 
         public NoteCardDetailViewHolder(View itemView, NoteItemListener noteItemListener) {
             super(itemView);
+            ButterKnife.bind(this, itemView);
+
             this.itemListener = noteItemListener;
-            color_indicator = itemView.findViewById(R.id.cent_view_color_indicator);
-            title = (TextView) itemView.findViewById(R.id.cnocd_txtv_title);
-            content = (TextView) itemView.findViewById(R.id.cnocd_txtv_content);
             itemView.setOnClickListener(this);
             itemView.setOnLongClickListener(this);
         }

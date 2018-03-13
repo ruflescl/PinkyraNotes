@@ -10,25 +10,29 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
+import com.pinkyra.pinkyranotes.Injection;
 import com.pinkyra.pinkyranotes.R;
 import com.pinkyra.pinkyranotes.db.note.NoteColorAccent;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnItemSelected;
 
 /**
  * Note editor fragment for choosing the color of the note
  */
-public class NoteEditorColorAccentPickerFragment extends Fragment {
+public class NoteEditorColorAccentPickerFragment extends Fragment
+        implements NoteEditorColorAccentPickerContract.View {
     // Fragment name tag
     public static final String TAG = "NoteEditorColorAccentPickerFragment";
 
     // The fragment initialization parameters
     private static final String ARG_INIT_COLOR = "ARG_INIT_COLOR";
 
-    // Initial color accent (view initialization)
-    private Integer initialColor;
+    private NoteEditorColorAccentPickerContract.UserActionsListener userActionsListener;
 
-    private View colorAccentView;
-    private Spinner colorAccentSpinner;
-
+    @BindView(R.id.cent_view_color_indicator) View colorAccentView;
+    @BindView(R.id.cent_spin_color_indicator) Spinner colorAccentSpinner;
     private ArrayAdapter<String> colorAccentSpinnerAdapter;
 
     public NoteEditorColorAccentPickerFragment() {
@@ -53,8 +57,14 @@ public class NoteEditorColorAccentPickerFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        userActionsListener = new NoteEditorColorAccentPickerPresenter(
+                Injection.provideNoteRepository(this.getContext()),
+                this,
+                this.getContext());
+
         if (getArguments() != null) {
-            initialColor = getArguments().getInt(ARG_INIT_COLOR);
+            userActionsListener.setupInitialColor(getArguments().getInt(ARG_INIT_COLOR));
         }
     }
 
@@ -63,37 +73,36 @@ public class NoteEditorColorAccentPickerFragment extends Fragment {
                              Bundle savedInstanceState) {
         View baseView = inflater.inflate(R.layout.content_note_editor_color_accent_picker, container, false);
 
-        colorAccentView = baseView.findViewById(R.id.cent_view_color_indicator);
+        ButterKnife.bind(this, baseView);
 
-        colorAccentSpinner = baseView.findViewById(R.id.cent_spin_color_indicator);
+        initColorSpinner();
 
-        colorAccentSpinnerAdapter = new ArrayAdapter<String>(this.getContext(),
-                android.R.layout.simple_spinner_item,
-                NoteColorAccent.Colors.getColorStrings(this.getContext()));
-
-        colorAccentSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        colorAccentSpinner.setAdapter(colorAccentSpinnerAdapter);
-        colorAccentSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                /*
-                NoteColorAccent.Colors selectedColor = NoteColorAccent.Colors.getColorFromString(Note.this,
-                        (String) adapterView.getSelectedItem());
-                        */
-
-                //changeColorAccent(selectedColor);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
+        userActionsListener.onViewsCreated();
 
         return baseView;
     }
 
-    private void changeColorAccent(@NonNull NoteColorAccent.Colors selectedColor) {
-        colorAccentView.setBackgroundResource(selectedColor.getColorResource());
+    private void initColorSpinner() {
+        colorAccentSpinner.setAdapter(userActionsListener.getColorsAdapter());
+    }
+
+    @OnItemSelected(R.id.cent_spin_color_indicator)
+    void onSpinColorItemSelected(int position) {
+        userActionsListener.onColorSpinnerItemSelected(position);
+    }
+
+    @Override
+    public void changeColorAccent(int colorId) {
+        colorAccentView.setBackgroundResource(colorId);
+    }
+
+    @Override
+    public void changeSpinnerPosition(final int position) {
+        colorAccentSpinner.post(new Runnable() {
+            @Override
+            public void run() {
+                colorAccentSpinner.setSelection(position);
+            }
+        });
     }
 }

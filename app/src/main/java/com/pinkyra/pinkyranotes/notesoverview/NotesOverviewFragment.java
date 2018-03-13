@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
@@ -23,6 +22,9 @@ import com.pinkyra.pinkyranotes.util.SwipeRefreshLayoutBuilder;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * Fragment
  */
@@ -32,9 +34,10 @@ public class NotesOverviewFragment
 
     private NotesOverviewContract.UserActionsListener userActionsListener;
     private NoteCardDetailAdapter cardDetailAdapter;
-    private RecyclerView notesRecyclerViewList;
-    private View emptyListView;
-    private SwipeRefreshLayout swipeRefreshLayout;
+
+    @BindView(R.id.cnom_cont_notes_detail_list) RecyclerView notesRecyclerViewList;
+    @BindView(R.id.cnom_cont_empty_content) View emptyListView;
+    @BindView(R.id.cnom_swrl_swipe_refresh) SwipeRefreshLayout swipeRefreshLayout;
 
     public NotesOverviewFragment() {
     }
@@ -71,25 +74,16 @@ public class NotesOverviewFragment
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View baseView = inflater.inflate(R.layout.content_notes_overview_master, container, false);
 
+        ButterKnife.bind(this, baseView);
+
         // Setting up notes recycler view
-        notesRecyclerViewList = (RecyclerView) baseView.findViewById(R.id.cnom_cont_notes_detail_list);
         notesRecyclerViewList.setAdapter(cardDetailAdapter);
         NoteCardDetailBuilder.setupLayoutManager(this.getContext(),
                 notesRecyclerViewList,
                 userActionsListener.getCardDetailPrefStyle(),
                 userActionsListener.getCardDetailPrefColumnCount());
 
-        // Setting up FAB (addNote user case related)
-        FloatingActionButton fab = (FloatingActionButton) getActivity().findViewById((R.id.abno_fab_add_note));
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                userActionsListener.addNote();
-            }
-        });
-
         // Setting up swipe refresh (loadNotes user case related)
-        swipeRefreshLayout = (SwipeRefreshLayout) baseView.findViewById(R.id.cnom_swrl_swipe_refresh);
         SwipeRefreshLayoutBuilder.setup(getActivity(), swipeRefreshLayout, new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -97,10 +91,11 @@ public class NotesOverviewFragment
             }
         });
 
-        // Get empty list view reference
-        emptyListView = baseView.findViewById(R.id.cnom_cont_empty_content);
-
         return baseView;
+    }
+
+    public void onFabAddNote_Click() {
+        userActionsListener.addNote();
     }
 
     @Override
