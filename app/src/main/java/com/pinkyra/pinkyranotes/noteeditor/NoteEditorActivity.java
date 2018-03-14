@@ -56,4 +56,12 @@ public class NoteEditorActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        NoteEditorTextFragment noteEditorTextFragment =
+                (NoteEditorTextFragment) getSupportFragmentManager().findFragmentById(R.id.acne_fram_note_edit_frame);
+
+        if (noteEditorTextFragment.doCheckBackPressedRule()) super.onBackPressed();
+    }
 }

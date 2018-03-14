@@ -1,19 +1,22 @@
 package com.pinkyra.pinkyranotes.noteeditor;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.pinkyra.pinkyranotes.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.OnLongClick;
 
 /**
  * Note editor fragment for editing text-based notes
@@ -33,12 +36,11 @@ public class NoteEditorTextFragment extends Fragment {
     int originalInputType_Title;
     int originalInputType_Content;
 
-    enum EditFlags {
+    enum EditStates {
         DISABLED,
-        FIRST_CLICK_DELAY,
         ENABLED
     }
-    EditFlags currentEditFlag = EditFlags.DISABLED;
+    EditStates currentEditState = EditStates.DISABLED;
 
     public NoteEditorTextFragment() {
 
@@ -77,49 +79,94 @@ public class NoteEditorTextFragment extends Fragment {
 
         ButterKnife.bind(this, baseView);
 
-        initTitleContentViews();
+        disableTitleContentEdition();
+
+        titleEditText.setText("Teste Teste Teste Teste Teste Teste Teste Teste");
+        contentEditText.setText("Teste\nTeste\nTeste\nTeste\nTeste\nTeste\nTeste\nTeste");
 
         return baseView;
     }
 
-    @OnClick(R.id.cent_eddt_note_content)
-    public void onContentTextClick() {
-        enableTitleContentEdition();
+    /**
+     * Business rule: If the editing fields are allowing edition, disable and save the note.
+     * Else, let the activity perform the back press.
+     */
+    public boolean doCheckBackPressedRule() {
+        if (currentEditState == EditStates.ENABLED) {
+            currentEditState = EditStates.DISABLED;
+            disableTitleContentEdition();
+            showSaveAndExitToast();
+            return false;
+        }
+        return true;
+    }
+
+    private void showSaveAndExitToast() {
+        Toast.makeText(this.getContext(),
+                "Nota salva! Para sair, pressione o botão 'Voltar' novamente!",
+                Toast.LENGTH_LONG).show();
     }
 
     @OnClick(R.id.cent_eddt_note_title)
     public void onTitleTextClick() {
-        enableTitleContentEdition();
+        if (currentEditState == EditStates.DISABLED) showEditEnablingToast();
     }
 
-    private void initTitleContentViews() {
-        originalInputType_Title = titleEditText.getInputType();
-        originalInputType_Content = contentEditText.getInputType();
+    @OnClick(R.id.cent_eddt_note_content)
+    public void onContentTextClick() {
+        if (currentEditState == EditStates.DISABLED) showEditEnablingToast();
+    }
 
+    private void showEditEnablingToast() {
+        Toast.makeText(this.getContext(),
+                "Para habilitar a edição da nota, clique e segure em uma das áreas de edição!",
+                Toast.LENGTH_LONG).show();
+    }
+
+    @OnLongClick(R.id.cent_eddt_note_title)
+    public boolean onTitleTextLongClick() {
+        enableTitleContentEdition(titleEditText);
+        return true;
+    }
+
+    @OnLongClick(R.id.cent_eddt_note_content)
+    public boolean onContentTextLongClick() {
+        enableTitleContentEdition(contentEditText);
+        return true;
+    }
+
+    private void disableTitleContentEdition() {
         titleEditText.setClickable(true);
-        titleEditText.setInputType(InputType.TYPE_NULL);
         contentEditText.setClickable(true);
-        contentEditText.setInputType(InputType.TYPE_NULL);
+        titleEditText.setFocusable(false);
+        contentEditText.setFocusable(false);
     }
 
-    // TODO: Create a delayed timer to enable edition on doubleclick
+    public void enableTitleContentEdition(final EditText viewToOpenKeyboard) {
+        currentEditState = EditStates.ENABLED;
 
-    public void enableTitleContentEdition() {
         titleEditText.post(new Runnable() {
             @Override
             public void run() {
                 titleEditText.setClickable(false);
-                titleEditText.setInputType(originalInputType_Title);
-                //titleEditText.postInvalidate();
+                titleEditText.setFocusableInTouchMode(true);
             }
         });
 
         contentEditText.post(new Runnable() {
             @Override
             public void run() {
-                contentEditText.setClickable(false);
-                contentEditText.setInputType(originalInputType_Content);
-                //titleEditText.postInvalidate();
+                titleEditText.setClickable(false);
+                contentEditText.setFocusableInTouchMode(true);
+            }
+        });
+
+        viewToOpenKeyboard.post(new Runnable() {
+            @Override
+            public void run() {
+                viewToOpenKeyboard.requestFocus();
+                InputMethodManager imm = (InputMethodManager) NoteEditorTextFragment.this.getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.toggleSoftInput(InputMethodManager.SHOW_FORCED,0);
             }
         });
     }
