@@ -1,4 +1,4 @@
-package com.pinkyra.pinkyranotes.noteeditor;
+package com.pinkyra.pinkyranotes.noteeditor.coloraccentpicker;
 
 import android.content.Context;
 import android.support.annotation.NonNull;

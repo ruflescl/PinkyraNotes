@@ -10,6 +10,8 @@ import android.view.MenuItem;
 
 import com.pinkyra.pinkyranotes.R;
 import com.pinkyra.pinkyranotes.db.note.NoteColorAccent;
+import com.pinkyra.pinkyranotes.noteeditor.coloraccentpicker.NoteEditorColorAccentPickerFragment;
+import com.pinkyra.pinkyranotes.noteeditor.texteditor.NoteEditorTextFragment;
 
 /**
  * Note editing activity (note creation and edition)

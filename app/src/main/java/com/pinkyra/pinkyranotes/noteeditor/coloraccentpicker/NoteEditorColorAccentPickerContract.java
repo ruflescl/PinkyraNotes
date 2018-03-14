@@ -1,10 +1,6 @@
-package com.pinkyra.pinkyranotes.noteeditor;
+package com.pinkyra.pinkyranotes.noteeditor.coloraccentpicker;
 
-import android.content.Context;
-import android.support.annotation.NonNull;
 import android.widget.ArrayAdapter;
-
-import com.pinkyra.pinkyranotes.db.note.NoteColorAccent;
 
 /**
  * Contract interfaces for specifying interactions between  {@link NoteEditorColorAccentPickerFragment} and

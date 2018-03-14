@@ -1,4 +1,4 @@
-package com.pinkyra.pinkyranotes.noteeditor;
+package com.pinkyra.pinkyranotes.noteeditor.texteditor;
 
 import android.content.Context;
 import android.os.Bundle;
