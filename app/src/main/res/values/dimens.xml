@@ -12,9 +12,14 @@
     <dimen name="fab_icon_width">24dp</dimen>
     <dimen name="fab_icon_height">24dp</dimen>
 
+    <dimen name="text_small_size">14sp</dimen>
+    <dimen name="text_medium_size">18sp</dimen>
+    <dimen name="text_large_size">24sp</dimen>
+
     <dimen name="card_radius">4dip</dimen>
-    <dimen name="card_large_radius">8dip</dimen>
     <dimen name="card_margin">4dip</dimen>
     <dimen name="card_padding">4dip</dimen>
+    <dimen name="color_indicator_height">4dip</dimen>
     <dimen name="view_margin_between">4dip</dimen>
+    <dimen name="spinner_height">32dp</dimen>
 </resources>

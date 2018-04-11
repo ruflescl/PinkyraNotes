@@ -3,6 +3,7 @@
     package="com.pinkyra.pinkyranotes">
 
     <application
+        android:name=".api.PinkyraApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/string_syst_app_name"

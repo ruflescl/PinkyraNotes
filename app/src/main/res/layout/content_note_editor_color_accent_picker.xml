@@ -6,41 +6,39 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/card_margin"
-    app:cardCornerRadius="@dimen/card_large_radius">
+    style="@style/AppTheme.CardViewContainer">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <View
+            style="@style/AppTheme.CardViewContent.ColorIndicator"
+            android:id="@+id/cent_view_color_indicator"
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/view_margin_between"
+            app:layout_constraintStart_toStartOf="parent" />
+
         <TextView
+            style="@style/AppTheme.CardViewContent.Text.Medium"
             android:id="@+id/cent_txtv_label_color_indicator"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/view_margin_between"
             android:text="@string/string_cent_label_cor_indicador"
             app:layout_constraintBottom_toBottomOf="@+id/cent_spin_color_indicator"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/cent_spin_color_indicator" />
 
         <android.support.v7.widget.AppCompatSpinner
+            style="@style/AppTheme.CardViewContent"
             android:id="@+id/cent_spin_color_indicator"
             android:layout_width="0dip"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/spinner_height"
             android:nextFocusDown="@+id/cent_txil_note_title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/cent_txtv_label_color_indicator"
             app:layout_constraintTop_toTopOf="parent"
             tools:listitem="@android:layout/simple_spinner_dropdown_item" />
-
-        <View
-            android:id="@+id/cent_view_color_indicator"
-            android:layout_width="match_parent"
-            android:layout_height="10dp"
-            android:layout_marginTop="@dimen/view_margin_between"
-            android:background="@color/colorAccent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cent_spin_color_indicator" />
 
     </android.support.constraint.ConstraintLayout>
 </android.support.v7.widget.CardView>

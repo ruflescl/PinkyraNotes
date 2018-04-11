@@ -45,4 +45,5 @@ ext {
     mockitoVersion = '1.10.19'
     powerMockito = '1.6.2'
     espressoVersion = '3.0.1'
+    dagger2Version = '2.13'
 }

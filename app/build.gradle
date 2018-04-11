@@ -75,6 +75,10 @@ dependencies {
     implementation 'com.jakewharton:butterknife:' + rootProject.butterknifeVersion
     annotationProcessor 'com.jakewharton:butterknife-compiler:' + rootProject.butterknifeVersion
 
+    // DI (Dagger2)
+    implementation 'com.google.dagger:dagger:' + rootProject.dagger2Version
+    annotationProcessor 'com.google.dagger:dagger-compiler:' + rootProject.dagger2Version
+
     // TESTING
     // JUnit & Runner
     testImplementation 'junit:junit:' + rootProject.junitVersion

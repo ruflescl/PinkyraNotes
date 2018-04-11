@@ -9,18 +9,20 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 
 import com.pinkyra.pinkyranotes.R;
+import com.pinkyra.pinkyranotes.api.BaseActivity;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class NotesOverviewActivity extends AppCompatActivity
+public class NotesOverviewActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     @BindView(R.id.acno_drawer_layout) DrawerLayout drawerLayout;
@@ -28,8 +30,11 @@ public class NotesOverviewActivity extends AppCompatActivity
     @BindView(R.id.acno_nav_view) NavigationView navigationView;
     @BindView(R.id.abno_fab_add_note) FloatingActionButton floatingActionButton;
 
+    @Inject FragmentManager fragmentManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        getViewComponent().inject(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notes_overview);
         ButterKnife.bind(this);
@@ -59,7 +64,6 @@ public class NotesOverviewActivity extends AppCompatActivity
     }
 
     private void initFragment(Fragment notesOverviewFragment) {
-        FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.add(R.id.acno_fram_content_frame, notesOverviewFragment);
         transaction.commit();

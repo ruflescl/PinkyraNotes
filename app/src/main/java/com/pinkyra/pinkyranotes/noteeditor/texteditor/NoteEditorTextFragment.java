@@ -81,9 +81,6 @@ public class NoteEditorTextFragment extends Fragment {
 
         disableTitleContentEdition();
 
-        titleEditText.setText("Teste Teste Teste Teste Teste Teste Teste Teste");
-        contentEditText.setText("Teste\nTeste\nTeste\nTeste\nTeste\nTeste\nTeste\nTeste");
-
         return baseView;
     }
 

@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+    Choose base (500) color from: https://material.io/guidelines/style/color.html#color-color-palette
+    Then find the primaryDark and colorAccent from: http://paletton.com
+-->
 <resources>
-    <color name="colorPrimary">#43a047</color>
-    <color name="colorPrimaryDark">#2e7d32</color>
-    <color name="colorAccent">#ff7043</color>
+    <color name="colorPrimary">#FFC107</color>
+    <color name="colorPrimaryDark">#9E7700</color>
+    <color name="colorAccent">#6262C8</color>
     <color name="fabIconPrimaryColor">#FFFFFF</color>
     <color name="lineSeparator">@android:color/darker_gray</color>
 
